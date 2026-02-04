@@ -21,7 +21,7 @@ const Navbar = ({ scrollY }) => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <span className="gradient-text">HetSocet</span>
+          <span className="gradient-text">Het Dev</span>
         </motion.div>
 
         <div className={`nav-menu ${isOpen ? 'active' : ''}`}>

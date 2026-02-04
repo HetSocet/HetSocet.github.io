@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="container">
         <div className="footer-content">
           <div className="footer-brand">
-            <h3 className="gradient-text">HetSocet</h3>
+            <h3 className="gradient-text">Het Dev</h3>
             <p>Building the future, one line of code at a time.</p>
           </div>
 
@@ -42,7 +42,7 @@ const Footer = () => {
 
         <div className="footer-bottom">
           <p>
-            © 2026 HetSocet. Made with <FaHeart className="heart" /> using React
+            © 2026 Het Dev. Made with <FaHeart className="heart" /> using React
           </p>
           <div className="footer-social">
             <a href="https://github.com" target="_blank" rel="noopener noreferrer">

@@ -1,1 +1,1 @@
-# HetSocet.github.io
+# Het Dev Portfolio
