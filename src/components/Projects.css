@@ -38,13 +38,15 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(99, 102, 241, 0.9);
+  background: rgba(157, 0, 255, 0.85);
+  /* Purple overlay */
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 20px;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.4s ease;
+  backdrop-filter: blur(4px);
 }
 
 .project-card:hover .project-overlay {
@@ -52,22 +54,23 @@
 }
 
 .project-link {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  border-radius: 4px;
   background: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--primary);
-  font-size: 1.2rem;
-  transition: all 0.3s ease;
+  color: var(--secondary);
+  font-size: 1.4rem;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .project-link:hover {
-  transform: scale(1.1);
-  background: var(--dark);
-  color: white;
+  transform: scale(1.15) rotate(10deg);
+  background: var(--primary);
+  color: var(--dark);
+  box-shadow: var(--green-glow);
 }
 
 .project-content {
@@ -75,32 +78,36 @@
 }
 
 .project-content h3 {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   margin-bottom: 15px;
   color: var(--text);
+  font-weight: 800;
+  letter-spacing: 0.5px;
 }
 
 .project-content p {
   font-size: 1rem;
   color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 20px;
+  line-height: 1.7;
+  margin-bottom: 25px;
 }
 
 .project-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
 }
 
 .tag {
-  padding: 6px 14px;
-  background: rgba(99, 102, 241, 0.1);
-  border: 1px solid rgba(99, 102, 241, 0.3);
-  border-radius: 20px;
-  font-size: 0.85rem;
+  padding: 6px 16px;
+  background: rgba(0, 255, 65, 0.05);
+  border: 1px solid rgba(0, 255, 65, 0.2);
+  border-radius: 4px;
+  font-size: 0.8rem;
   color: var(--primary);
-  font-weight: 500;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 @media (max-width: 768px) {

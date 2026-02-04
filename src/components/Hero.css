@@ -54,12 +54,16 @@
 }
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translate(0, 0) rotate(0deg);
   }
+
   33% {
     transform: translate(50px, -50px) rotate(120deg);
   }
+
   66% {
     transform: translate(-30px, 30px) rotate(240deg);
   }
@@ -75,69 +79,77 @@
 .hero-badge {
   display: inline-block;
   padding: 8px 20px;
-  background: rgba(99, 102, 241, 0.1);
-  border: 1px solid rgba(99, 102, 241, 0.3);
-  border-radius: 50px;
+  background: rgba(0, 255, 65, 0.05);
+  border: 1px solid rgba(0, 255, 65, 0.2);
+  border-radius: 4px;
   margin-bottom: 30px;
   font-size: 0.9rem;
-  color: var(--text-secondary);
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
 }
 
 .hero-title {
-  font-size: 4rem;
-  font-weight: 800;
+  font-size: 5rem;
+  font-weight: 900;
   margin-bottom: 20px;
-  line-height: 1.2;
+  line-height: 1.1;
+  letter-spacing: -2px;
 }
 
 .hero-subtitle {
-  font-size: 2rem;
-  font-weight: 600;
-  color: var(--text-secondary);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--text);
   margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
 }
 
 .hero-description {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   color: var(--text-secondary);
   line-height: 1.8;
-  margin-bottom: 40px;
-  max-width: 600px;
+  margin-bottom: 45px;
+  max-width: 650px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .hero-buttons {
   display: flex;
-  gap: 20px;
+  gap: 25px;
   justify-content: center;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
 }
 
 .hero-social {
   display: flex;
-  gap: 20px;
+  gap: 25px;
   justify-content: center;
 }
 
 .hero-social a {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: rgba(99, 102, 241, 0.1);
-  border: 1px solid rgba(99, 102, 241, 0.3);
+  width: 55px;
+  height: 55px;
+  border-radius: 4px;
+  background: rgba(157, 0, 255, 0.05);
+  border: 1px solid rgba(157, 0, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--text);
-  font-size: 1.3rem;
-  transition: all 0.3s ease;
+  font-size: 1.5rem;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .hero-social a:hover {
-  background: var(--gradient);
-  border-color: transparent;
-  transform: translateY(-5px);
+  background: var(--secondary);
+  border-color: var(--secondary);
+  color: white;
+  transform: translateY(-8px) rotate(8deg);
+  box-shadow: var(--purple-glow);
 }
 
 .scroll-indicator {

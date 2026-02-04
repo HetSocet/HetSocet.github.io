@@ -13,12 +13,15 @@
   color: var(--text);
   padding-left: 20px;
   border-left: 4px solid var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 800;
 }
 
 .skills-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
 }
 
 .skill-item {
@@ -29,9 +32,10 @@
 }
 
 .skill-icon {
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   color: var(--primary);
   flex-shrink: 0;
+  filter: drop-shadow(0 0 10px rgba(0, 255, 65, 0.3));
 }
 
 .skill-info {
@@ -39,25 +43,29 @@
 }
 
 .skill-info h4 {
-  font-size: 1.1rem;
-  margin-bottom: 10px;
+  font-size: 1.15rem;
+  margin-bottom: 12px;
   color: var(--text);
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 .skill-bar {
   width: 100%;
-  height: 8px;
-  background: rgba(99, 102, 241, 0.1);
-  border-radius: 10px;
+  height: 6px;
+  background: rgba(157, 0, 255, 0.1);
+  border-radius: 4px;
   overflow: hidden;
   margin-bottom: 8px;
+  border: 1px solid rgba(157, 0, 255, 0.05);
 }
 
 .skill-progress {
   height: 100%;
-  background: var(--gradient);
-  border-radius: 10px;
+  background: var(--primary);
+  border-radius: 4px;
   position: relative;
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.6);
 }
 
 .skill-progress::after {
@@ -67,12 +75,10 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.3),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent);
   animation: shimmer 2s infinite;
 }
 
@@ -80,6 +86,7 @@
   0% {
     transform: translateX(-100%);
   }
+
   100% {
     transform: translateX(100%);
   }

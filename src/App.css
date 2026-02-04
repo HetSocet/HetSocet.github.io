@@ -16,14 +16,17 @@
 }
 
 .section-title {
-  font-size: 3rem;
-  font-weight: 700;
+  font-size: 3.5rem;
+  font-weight: 800;
   text-align: center;
   margin-bottom: 60px;
   background: var(--gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  filter: drop-shadow(0 0 10px rgba(0, 255, 65, 0.2));
 }
 
 .gradient-text {
@@ -34,52 +37,76 @@
 }
 
 .btn {
-  padding: 14px 32px;
-  border-radius: 50px;
+  padding: 14px 36px;
+  border-radius: 4px;
+  /* Squarer look for more tech/cyberpunk feel */
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   border: none;
   outline: none;
   text-decoration: none;
   display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .btn-primary {
-  background: var(--gradient);
-  color: white;
-  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+  background: var(--primary);
+  color: var(--dark);
+  box-shadow: var(--green-glow);
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 0 30px rgba(0, 255, 65, 0.5);
 }
 
 .btn-outline {
   background: transparent;
-  color: var(--text);
-  border: 2px solid var(--primary);
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  box-shadow: inset 0 0 0 0 var(--primary);
 }
 
 .btn-outline:hover {
-  background: var(--primary);
-  transform: translateY(-2px);
+  background: transparent;
+  box-shadow: inset 0 0 20px 0 var(--primary), var(--green-glow);
+  transform: translateY(-5px);
 }
 
 .card {
   background: var(--dark-light);
-  border-radius: 20px;
+  border-radius: 12px;
   padding: 30px;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(99, 102, 241, 0.1);
+  transition: all 0.4s ease;
+  border: 1px solid rgba(157, 0, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--gradient);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
 }
 
 .card:hover {
   transform: translateY(-10px);
-  border-color: var(--primary);
-  box-shadow: 0 10px 40px rgba(99, 102, 241, 0.3);
+  border-color: var(--secondary);
+  box-shadow: var(--purple-glow);
+}
+
+.card:hover::before {
+  transform: scaleX(1);
 }
 
 @media (max-width: 768px) {

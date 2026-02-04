@@ -6,6 +6,7 @@ import Skills from './components/Skills'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import Cursor from './components/Cursor'
 import './App.css'
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
 
   return (
     <div className="App">
+      <Cursor />
       <Navbar scrollY={scrollY} />
       <Hero />
       <About />

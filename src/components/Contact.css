@@ -10,22 +10,25 @@
 }
 
 .contact-info h3 {
-  font-size: 2rem;
+  font-size: 2.2rem;
   margin-bottom: 20px;
   color: var(--text);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.contact-info > p {
-  font-size: 1.1rem;
+.contact-info>p {
+  font-size: 1.15rem;
   line-height: 1.8;
   color: var(--text-secondary);
-  margin-bottom: 40px;
+  margin-bottom: 45px;
 }
 
 .contact-details {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 35px;
 }
 
 .contact-item {
@@ -35,31 +38,43 @@
 }
 
 .contact-icon {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: rgba(99, 102, 241, 0.1);
-  border: 1px solid rgba(99, 102, 241, 0.3);
+  width: 55px;
+  height: 55px;
+  border-radius: 4px;
+  background: rgba(157, 0, 255, 0.05);
+  border: 1px solid rgba(157, 0, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.3rem;
-  color: var(--primary);
+  font-size: 1.4rem;
+  color: var(--secondary);
   flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.contact-item:hover .contact-icon {
+  background: var(--secondary);
+  color: white;
+  box-shadow: var(--purple-glow);
+  transform: scale(1.1);
 }
 
 .contact-text h4 {
-  font-size: 1rem;
-  color: var(--text);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
   margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
 }
 
 .contact-text p,
 .contact-text a {
-  font-size: 1rem;
-  color: var(--text-secondary);
+  font-size: 1.1rem;
+  color: var(--text);
   text-decoration: none;
   transition: color 0.3s ease;
+  font-weight: 500;
 }
 
 .contact-text a:hover {
@@ -69,7 +84,8 @@
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 25px;
+  border: 1px solid rgba(157, 0, 255, 0.1) !important;
 }
 
 .form-group {
@@ -80,37 +96,41 @@
 .form-group textarea {
   width: 100%;
   padding: 16px 20px;
-  background: rgba(99, 102, 241, 0.05);
-  border: 2px solid rgba(99, 102, 241, 0.2);
-  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(157, 0, 255, 0.2);
+  border-radius: 4px;
   color: var(--text);
   font-size: 1rem;
   font-family: inherit;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
   outline: none;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   border-color: var(--primary);
-  background: rgba(99, 102, 241, 0.1);
+  background: rgba(0, 255, 65, 0.05);
+  box-shadow: var(--green-glow);
 }
 
 .form-group textarea {
   resize: vertical;
-  min-height: 120px;
+  min-height: 140px;
 }
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-  color: var(--text-secondary);
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.8rem;
 }
 
 .contact-form button {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 15px;
   margin-top: 10px;
 }
 
