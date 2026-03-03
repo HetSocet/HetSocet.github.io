@@ -1,40 +1,85 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 :root {
-  --primary: #00ff41;
-  /* Neon Green */
-  --secondary: #9d00ff;
-  /* Vivid Purple */
-  --accent: #bc13fe;
-  /* Neon Purple */
-  --dark: #000000;
-  /* Pure Black */
-  --dark-light: #0d0d0d;
-  /* Very Dark Gray/Black */
-  --text: #f0f0f0;
-  --text-secondary: #a0a0a0;
-  --success: #00ff41;
-  --gradient: linear-gradient(135deg, #00ff41 0%, #9d00ff 100%);
-  --purple-glow: 0 0 20px rgba(157, 0, 255, 0.3);
-  --green-glow: 0 0 20px rgba(0, 255, 65, 0.3);
+  --brand-charcoal: #1A1A1A;
+  --brand-accent: #E05A3E;
+  --brand-paper: #FDF1E4;
+  --brand-notebook-border: #C94E34;
+  --brand-grid: #D1DBE5;
 }
 
 body {
-  font-family: 'Outfit', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  background-color: #1C1C1C;
+  color: var(--brand-charcoal);
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--dark);
-  color: var(--text);
-  overflow-x: hidden;
 }
 
-code,
-.skill-progress::after {
-  font-family: 'JetBrains Mono', monospace;
+h1,
+h2,
+h3,
+.serif {
+  font-family: 'Instrument Serif', serif;
+}
+
+.hand {
+  font-family: 'Gaegu', cursive;
+}
+
+/* Notebook UI Components */
+.notebook-container {
+  background-color: #BD462E;
+  border-radius: 40px;
+  padding: 10px;
+  padding-left: 20px;
+  box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
+  position: relative;
+  /* transform: rotate(-0.5deg); Removed for better responsive behavior in React */
+  margin: 40px auto;
+  max-width: 1200px;
+  width: 95%;
+}
+
+.notebook-page {
+  background-color: var(--brand-paper);
+  background-image:
+    linear-gradient(var(--brand-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--brand-grid) 1px, transparent 1px);
+  background-size: 30px 30px;
+  border-radius: 30px;
+  min-height: 85vh;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.ribbon {
+  position: absolute;
+  bottom: -20px;
+  left: 100px;
+  width: 40px;
+  height: 100px;
+  background: #BD462E;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 85%, 0 100%);
+  z-index: 5;
+}
+
+.sketch-card {
+  border: 2px solid #D9583B;
+  border-radius: 255px 25px 225px 25px/25px 225px 25px 255px;
+  background-color: var(--brand-paper);
+  background-image:
+    linear-gradient(var(--brand-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--brand-grid) 1px, transparent 1px);
+  background-size: 20px 20px;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.sketch-card:hover {
+  transform: scale(1.03) rotate(1deg);
 }
 
 html {
@@ -46,15 +91,31 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--dark);
+  background: #1C1C1C;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary);
+  background: var(--brand-accent);
   border-radius: 4px;
-  box-shadow: 0 0 10px var(--primary);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--secondary);
+@media (max-width: 768px) {
+  .notebook-container {
+    margin: 10px auto;
+    border-radius: 20px;
+    padding: 5px;
+    padding-left: 10px;
+    width: 98%;
+  }
+
+  .notebook-page {
+    border-radius: 15px;
+    background-size: 20px 20px;
+  }
+
+  .ribbon {
+    left: 20px;
+    width: 25px;
+    height: 60px;
+  }
 }

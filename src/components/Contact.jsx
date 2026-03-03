@@ -32,19 +32,19 @@ const Contact = () => {
     {
       icon: <FaEnvelope />,
       title: 'Email',
-      value: 'contact@het-dev.me',
-      link: 'mailto:contact@het-dev.me'
+      value: 'hetwork0312@gmail.com',
+      link: 'mailto:hetwork0312@gmail.com'
     },
     {
       icon: <FaPhone />,
       title: 'Phone',
-      value: '+1 (555) 123-4567',
-      link: 'tel:+15551234567'
+      value: '+91 8866543503',
+      link: 'tel:+918866543503'
     },
     {
       icon: <FaMapMarkerAlt />,
       title: 'Location',
-      value: 'San Francisco, CA',
+      value: 'Ahmedabad, Gujarat',
       link: null
     }
   ]
@@ -70,8 +70,8 @@ const Contact = () => {
           >
             <h3>Let's Work Together</h3>
             <p>
-              Have a project in mind or want to discuss opportunities? 
-              I'd love to hear from you. Drop me a message and let's create 
+              Have a project in mind or want to discuss opportunities?
+              I'd love to hear from you. Drop me a message and let's create
               something amazing together!
             </p>
 
