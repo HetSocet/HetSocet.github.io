@@ -14,11 +14,10 @@ import './Lanyard.css';
 
 extend({ MeshLineGeometry, MeshLineMaterial });
 
-export default function Lanyard({ position = [0, 0, 30], gravity = [0, -40, 0], fov = 20, transparent = true }) {
+export default function Lanyard({ position = [0, 0, 30], gravity = [0, -40, 0], fov = 20, transparent = true, onCardDragged }) {
   const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 768);
 
   useEffect(() => {
-    console.log('Lanyard component mounted');
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -35,7 +34,7 @@ export default function Lanyard({ position = [0, 0, 30], gravity = [0, -40, 0], 
         <ambientLight intensity={Math.PI} />
         <Suspense fallback={null}>
           <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
-            <Band isMobile={isMobile} />
+            <Band isMobile={isMobile} onCardDragged={onCardDragged} />
           </Physics>
         </Suspense>
         <Environment blur={0.75}>
@@ -76,13 +75,14 @@ export default function Lanyard({ position = [0, 0, 30], gravity = [0, -40, 0], 
 // Preload assets
 useGLTF.preload(cardGLB);
 useTexture.preload(lanyard);
-function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
+function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, onCardDragged }) {
   const band = useRef(),
     fixed = useRef(),
     j1 = useRef(),
     j2 = useRef(),
     j3 = useRef(),
     card = useRef();
+  const hasCalledCallback = useRef(false);
   const vec = new THREE.Vector3(),
     ang = new THREE.Vector3(),
     rot = new THREE.Vector3(),
@@ -164,10 +164,14 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
             onPointerOver={() => hover(true)}
             onPointerOut={() => hover(false)}
             onPointerUp={e => (e.target.releasePointerCapture(e.pointerId), drag(false))}
-            onPointerDown={e => (
-              e.target.setPointerCapture(e.pointerId),
-              drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation())))
-            )}
+            onPointerDown={e => {
+              e.target.setPointerCapture(e.pointerId);
+              drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation())));
+              if (!hasCalledCallback.current && onCardDragged) {
+                hasCalledCallback.current = true;
+                onCardDragged();
+              }
+            }}
           >
             <mesh geometry={nodes.card.geometry}>
               <meshPhysicalMaterial

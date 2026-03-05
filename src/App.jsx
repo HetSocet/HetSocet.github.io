@@ -13,18 +13,14 @@ function App() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    console.log('App component mounted, isLoading:', isLoading);
     const handleScroll = () => setScrollY(window.scrollY)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   const handleLoadingComplete = () => {
-    console.log('handleLoadingComplete called');
     setIsLoading(false)
   }
-
-  console.log('App rendering, isLoading:', isLoading);
 
   if (isLoading) {
     return <LoadingScreen onLoadingComplete={handleLoadingComplete} />
