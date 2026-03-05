@@ -4,17 +4,31 @@ import Hero from './components/Hero'
 import About from './components/About'
 import Projects from './components/Projects'
 import Footer from './components/Footer'
+import LoadingScreen from './components/LoadingScreen'
 import brandStamp from './assets/brand_stamp.png'
 import './App.css'
 
 function App() {
   const [scrollY, setScrollY] = useState(0)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
+    console.log('App component mounted, isLoading:', isLoading);
     const handleScroll = () => setScrollY(window.scrollY)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  const handleLoadingComplete = () => {
+    console.log('handleLoadingComplete called');
+    setIsLoading(false)
+  }
+
+  console.log('App rendering, isLoading:', isLoading);
+
+  if (isLoading) {
+    return <LoadingScreen onLoadingComplete={handleLoadingComplete} />
+  }
 
   return (
     <div className="App">
