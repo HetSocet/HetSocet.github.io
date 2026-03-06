@@ -6,18 +6,18 @@
 
 .side-border-left,
 .side-border-right {
-  position: fixed;
+  position: absolute;
   top: 0;
-  width: 80px;
-  height: 100vh;
+  width: 100px;
+  min-height: 100%;
   z-index: 10;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  gap: 8px;
   align-items: center;
-  padding: 40px 0;
+  padding: 0 10px;
+  padding-top: 20px;
   background-color: transparent;
-  pointer-events: none;
 }
 
 .side-border-left {
@@ -28,20 +28,65 @@
   right: 0;
 }
 
-.stamp-icon {
-  width: 40px;
-  height: 40px;
-  opacity: 0.3;
-  filter: grayscale(1) contrast(1.5);
-  mix-blend-mode: color-dodge;
+.sticker-wrapper {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  pointer-events: auto;
 }
 
-.rotate-180 {
-  transform: rotate(180deg);
+.sticker-wrapper:hover {
+  transform: scale(1.1);
+}
+
+.sticker-image {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.3s ease;
+}
+
+.sticker-wrapper:hover .sticker-image {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+}
+
+.sticker-name {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10;
+  animation: fadeIn 0.2s ease-in;
+  font-family: 'Gaegu', cursive;
+}
+
+.side-border-left .sticker-name {
+  left: calc(100% + 10px);
+}
+
+.side-border-right .sticker-name {
+  right: calc(100% + 10px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @media (max-width: 1100px) {
-
   .side-border-left,
   .side-border-right {
     display: none;

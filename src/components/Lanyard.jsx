@@ -83,6 +83,8 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, onCardDragged }) 
     j3 = useRef(),
     card = useRef();
   const hasCalledCallback = useRef(false);
+  const hasDragged = useRef(false);
+  const releaseTimerRef = useRef(null);
   const vec = new THREE.Vector3(),
     ang = new THREE.Vector3(),
     rot = new THREE.Vector3(),
@@ -111,6 +113,15 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, onCardDragged }) 
       return () => void (document.body.style.cursor = 'auto');
     }
   }, [hovered, dragged]);
+
+  // Cleanup timer on unmount
+  useEffect(() => {
+    return () => {
+      if (releaseTimerRef.current) {
+        clearTimeout(releaseTimerRef.current);
+      }
+    };
+  }, []);
 
   useFrame((state, delta) => {
     if (dragged) {
@@ -163,13 +174,32 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, onCardDragged }) 
             position={[0, -1.2, -0.05]}
             onPointerOver={() => hover(true)}
             onPointerOut={() => hover(false)}
-            onPointerUp={e => (e.target.releasePointerCapture(e.pointerId), drag(false))}
+            onPointerUp={e => {
+              e.target.releasePointerCapture(e.pointerId);
+              drag(false);
+              
+              // Clear any existing timer
+              if (releaseTimerRef.current) {
+                clearTimeout(releaseTimerRef.current);
+              }
+              
+              // If user has dragged, start a 1-second timer to transition
+              if (hasDragged.current && !hasCalledCallback.current && onCardDragged) {
+                releaseTimerRef.current = setTimeout(() => {
+                  hasCalledCallback.current = true;
+                  onCardDragged();
+                }, 1000);
+              }
+            }}
             onPointerDown={e => {
               e.target.setPointerCapture(e.pointerId);
               drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation())));
-              if (!hasCalledCallback.current && onCardDragged) {
-                hasCalledCallback.current = true;
-                onCardDragged();
+              hasDragged.current = true;
+              
+              // Clear any pending timer if user drags again
+              if (releaseTimerRef.current) {
+                clearTimeout(releaseTimerRef.current);
+                releaseTimerRef.current = null;
               }
             }}
           >
