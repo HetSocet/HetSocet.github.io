@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Cursor from './components/Cursor'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -50,6 +51,7 @@ function App() {
 
   return (
     <div className="App">
+      <Cursor />
       {/* Decorative Side Borders with Stickers */}
       <aside className="side-border-left">
         {repeatedLeftStickers.map((sticker, index) => (

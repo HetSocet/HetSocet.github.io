@@ -41,6 +41,27 @@
   overflow: hidden;
   border-radius: 10px;
   margin-bottom: 20px;
+  position: relative;
+}
+
+.project-open-hint {
+  position: absolute;
+  bottom: 12px;
+  right: 14px;
+  background: var(--brand-accent);
+  color: var(--brand-paper);
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+}
+
+.project-card-sketch:hover .project-open-hint {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .project-image-sketch img {
