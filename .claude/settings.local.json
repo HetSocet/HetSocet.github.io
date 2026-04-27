@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Bash(npm run:*)",
-      "Bash(npx vite:*)"
+      "Bash(npx vite:*)",
+      "Bash(npm install *)",
+      "Bash(curl -s http://localhost:5175)",
+      "Bash(curl -s http://localhost:5175/src/App.jsx)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5176)"
     ]
   }
 }

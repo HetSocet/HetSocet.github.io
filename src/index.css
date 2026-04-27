@@ -1,121 +1,34 @@
-:root {
-  --brand-charcoal: #1A1A1A;
-  --brand-accent: #E05A3E;
-  --brand-paper: #FDF1E4;
-  --brand-notebook-border: #C94E34;
-  --brand-grid: #D1DBE5;
-}
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
-body {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
-  background-color: #1C1C1C;
-  color: var(--brand-charcoal);
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-h1,
-h2,
-h3,
-.serif {
-  font-family: 'Instrument Serif', serif;
-}
-
-.hand {
-  font-family: 'Gaegu', cursive;
-}
-
-/* Notebook UI Components */
-.notebook-container {
-  background-color: #BD462E;
-  border-radius: 40px;
-  padding: 10px;
-  padding-left: 20px;
-  box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
-  position: relative;
-  /* transform: rotate(-0.5deg); Removed for better responsive behavior in React */
-  margin: 40px auto;
-  max-width: 1200px;
-  width: 95%;
-}
-
-.notebook-page {
-  background-color: var(--brand-paper);
-  background-image:
-    linear-gradient(var(--brand-grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--brand-grid) 1px, transparent 1px);
-  background-size: 30px 30px;
-  border-radius: 30px;
-  min-height: 85vh;
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.ribbon {
-  position: absolute;
-  bottom: -20px;
-  left: 100px;
-  width: 40px;
-  height: 100px;
-  background: #BD462E;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 85%, 0 100%);
-  z-index: 5;
-}
-
-.sketch-card {
-  border: 2px solid #D9583B;
-  border-radius: 255px 25px 225px 25px/25px 225px 25px 255px;
-  background-color: var(--brand-paper);
-  background-image:
-    linear-gradient(var(--brand-grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--brand-grid) 1px, transparent 1px);
-  background-size: 20px 20px;
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.sketch-card:hover {
-  transform: scale(1.03) rotate(1deg);
+  font-family: 'Outfit', sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
+body {
+  background: #0A0A0A;
+  color: #ffffff;
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 4px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1C1C1C;
+  background: #0A0A0A;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--brand-accent);
+  background: #222;
   border-radius: 4px;
-}
-
-@media (max-width: 768px) {
-  .notebook-container {
-    margin: 10px auto;
-    border-radius: 20px;
-    padding: 5px;
-    padding-left: 10px;
-    width: 98%;
-  }
-
-  .notebook-page {
-    border-radius: 15px;
-    background-size: 20px 20px;
-  }
-
-  .ribbon {
-    left: 20px;
-    width: 25px;
-    height: 60px;
-  }
 }
