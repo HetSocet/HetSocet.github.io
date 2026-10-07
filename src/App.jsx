@@ -1,9 +1,13 @@
-import { useEffect, useRef, useState } from 'react'
-import { TbArrowUpRight, TbArrowDown, TbArrowUp, TbDownload, TbSun, TbMoon, TbMenu2, TbX, TbCopy, TbCheck, TbBrandGithub, TbBrandLinkedin, TbPlus, TbMinus, TbDeviceMobile, TbWorld, TbPuzzle } from 'react-icons/tb'
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { TbArrowUpRight, TbArrowDown, TbArrowUp, TbDownload, TbSun, TbMoon, TbMenu2, TbX, TbCopy, TbCheck, TbBrandGithub, TbBrandLinkedin } from 'react-icons/tb'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollSmoother } from 'gsap/ScrollSmoother'
 import { profile, projects } from './data/projects'
+import GardenIntro from './components/GardenIntro'
+import SelectedWork from './components/SelectedWork'
+import ProjectSlider from './components/ProjectSlider'
+import FooterWave from './components/FooterWave'
 import './App.css'
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
@@ -12,8 +16,16 @@ const categories = ['All', 'Mobile', 'Web', 'Extensions']
 const Icon = ({ children }) => <span className="icon" aria-hidden="true">{children}</span>
 
 function Motion({ revision }) {
-  useEffect(() => {
+  useLayoutEffect(() => {
     const media = gsap.matchMedia()
+    media.add('(min-width: 1024px) and (prefers-reduced-motion: no-preference) and (pointer: fine)', () => {
+      const smoother = ScrollSmoother.create({ wrapper: '#smooth-wrapper', content: '#smooth-content', smooth: .85, effects: false, normalizeScroll: false,
+        onFocusIn: (_, event) => {
+          if (!document.querySelector('#smooth-content').contains(event.target) || event.target.closest('.slider-card, .cover-card')) return false
+        },
+      })
+      return () => smoother.kill()
+    })
     media.add('(prefers-reduced-motion: no-preference)', () => {
       const timeline = gsap.timeline({ defaults: { ease: 'power3.out', duration: 1 } })
       timeline.from('.hero-copy > *', { y: 35, opacity: 0, stagger: .12 })
@@ -24,10 +36,6 @@ function Motion({ revision }) {
     })
     media.add('(min-width: 768px) and (prefers-reduced-motion: no-preference)', () => {
       gsap.from('.hero-art', { rotation: -8, duration: 1.1, delay: .15, ease: 'power3.out' })
-    })
-    media.add('(min-width: 1024px) and (prefers-reduced-motion: no-preference) and (pointer: fine)', () => {
-      const smoother = ScrollSmoother.create({ wrapper: '#smooth-wrapper', content: '#smooth-content', smooth: .85, effects: false, normalizeScroll: false })
-      return () => smoother.kill()
     })
     const refresh = () => ScrollTrigger.refresh()
     document.fonts.ready.then(refresh)
@@ -66,6 +74,7 @@ function ProjectDialog({ project, onClose }) {
     {project && <div className="dialog-content">
       <button className="icon-button dialog-close" aria-label="Close project" onClick={onClose} autoFocus><TbX /></button>
       <p className="mono muted">{project.field}</p>
+      {project.logo && <img className="dialog-logo" src={project.logo} alt="" width="64" height="64" />}
       <h2 id="project-title">{project.name}</h2>
       <p className="dialog-description">{project.description}</p>
       {project.featured && <ProjectVisual project={project} gallery />}
@@ -73,7 +82,7 @@ function ProjectDialog({ project, onClose }) {
       <h3>What I worked on</h3>
       <ul className="contribution-list">{project.contribution.map(item => <li key={item}>{item}</li>)}</ul>
       <div className="tags">{project.stack.map(tag => <span key={tag}>{tag}</span>)}</div>
-      <a className="button button-dark" href={project.url} target="_blank" rel="noreferrer">{project.category === 'Extensions' ? 'View on Chrome Web Store' : project.url.includes('play.google') ? 'View on Google Play' : 'Visit website'}<Icon><TbArrowUpRight /></Icon></a>
+      <div className="dialog-store-links"><a className="button button-dark" href={project.url} target="_blank" rel="noreferrer">{project.category === 'Extensions' ? 'View on Chrome Web Store' : project.url.includes('play.google') ? 'View on Google Play' : project.url.includes('apps.apple') ? 'View on App Store' : 'Visit website'}<Icon><TbArrowUpRight /></Icon></a>{project.appleUrl && <a className="button button-outline" href={project.appleUrl} target="_blank" rel="noreferrer">App Store<Icon><TbArrowUpRight /></Icon></a>}</div>
     </div>}
   </dialog>
 }
@@ -82,13 +91,17 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [theme, setTheme] = useState(() => document.documentElement.dataset.theme || 'light')
   const [filter, setFilter] = useState('All')
-  const [expanded, setExpanded] = useState(false)
+  const [introPlaying, setIntroPlaying] = useState(() => { try { return !sessionStorage.getItem('het-intro-seen') && !location.hash } catch { return !location.hash } })
   const [selectedProject, setSelectedProject] = useState(null)
   const [copyStatus, setCopyStatus] = useState('')
   const copyTimer = useRef(null)
   const menuButton = useRef(null)
-  const filtered = projects.filter(project => filter === 'All' || project.category === filter)
-  const visible = expanded ? filtered : filtered.slice(0, 6)
+  const filtered = useMemo(() => projects.filter(project => filter === 'All' || project.category === filter), [filter])
+  const finishIntro = useCallback(() => {
+    try { sessionStorage.setItem('het-intro-seen', 'true') } catch {}
+    setIntroPlaying(false)
+    requestAnimationFrame(() => document.querySelector('#home')?.focus({ preventScroll: true }))
+  }, [])
 
   useEffect(() => {
     const preference = window.matchMedia('(prefers-color-scheme: dark)')
@@ -117,7 +130,9 @@ function App() {
     event.preventDefault()
     setMenuOpen(false)
     const smoother = ScrollSmoother.get()
-    if (smoother) smoother.scrollTo(target, true, 'top 90px')
+    const pinned = ScrollTrigger.getAll().find(trigger => trigger.trigger === target && trigger.pin)
+    if (smoother) smoother.scrollTo(pinned ? pinned.start : target, true, 'top 90px')
+    else if (pinned) window.scrollTo({ top: pinned.start, behavior: 'smooth' })
     else target.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
     history.pushState(null, '', anchor.getAttribute('href'))
     target.focus({ preventScroll: true })
@@ -130,8 +145,9 @@ function App() {
   }
 
   return <div onClick={navigate}>
-    <a className="skip-link" href="#main">Skip to content</a>
-    <header className="site-header">
+    {!introPlaying && <Motion revision={filter} />}
+    <a className="skip-link" href="#main" inert={introPlaying}>Skip to content</a>
+    <header className="site-header" inert={introPlaying}>
       <div className="nav-inner">
         <a href="#home" className="wordmark" aria-label="Het Patel, home">het<span>.</span></a>
         <nav id="main-nav" aria-label="Main navigation" className={menuOpen ? 'navigation is-open' : 'navigation'}>
@@ -146,7 +162,7 @@ function App() {
         </div>
       </div>
     </header>
-    <div id="smooth-wrapper"><div id="smooth-content">
+    <div id="smooth-wrapper" inert={introPlaying}><div id="smooth-content">
       <main id="main" tabIndex="-1">
         <section id="home" className="hero container" tabIndex="-1" aria-labelledby="hero-title">
           <div className="hero-copy">
@@ -157,18 +173,7 @@ function App() {
           </div>
           <div className="hero-art" aria-hidden="true"><div className="hero-art-inner"><img src="/images/optimized/chrome-asterisk.webp" alt="" width="900" height="900" fetchPriority="high" /></div></div>
         </section>
-        <section id="work" className="work-section container section-space" tabIndex="-1" aria-labelledby="work-title">
-          <div className="section-heading" data-reveal><h2 id="work-title">Selected work<span className="heading-dot">.</span></h2><p>A few things I’ve helped bring into the world.</p></div>
-          <div className="project-grid">
-            {featured.map(project => <article className={`featured-project featured-${project.id}`} key={project.id} data-reveal>
-              <button className="project-card" onClick={() => setSelectedProject(project)}>
-                <ProjectVisual project={project} />
-                <div className="project-caption"><div><p className="mono project-field">{project.field}</p><h3>{project.name}</h3></div><span className="round-arrow"><TbArrowUpRight aria-hidden="true" /></span></div>
-                <p className="project-summary">{project.summary}</p><p className="project-stack">{project.stack.join(' / ')}</p>
-              </button>
-            </article>)}
-          </div>
-        </section>
+        <SelectedWork projects={featured} onSelect={setSelectedProject} ready={!introPlaying} />
         <section id="about" className="about-section container section-space" tabIndex="-1" aria-labelledby="about-title">
           <div className="about-top" data-reveal><p className="mono muted">A little about me</p><h2 id="about-title">A developer’s mind.<br /><span className="muted">A product person’s heart.</span></h2></div>
           <div className="about-grid">
@@ -180,21 +185,20 @@ function App() {
           </div>
           <div id="skills" className="skills-strip" data-reveal><span className="mono">My everyday toolkit</span><div>{['React Native', 'FlutterFlow', 'React', 'Next.js', 'Firebase', 'Supabase', 'JavaScript'].map(skill => <span key={skill}>{skill}</span>)}</div></div>
         </section>
-        <section id="archive" className="archive-section container section-space" tabIndex="-1" aria-labelledby="archive-title">
-          <div className="section-heading" data-reveal><h2 id="archive-title">There’s more to the story<span className="heading-dot">.</span></h2><p>Mobile apps, web products, and small tools that make a difference.</p></div>
-          <div className="archive-toolbar"><div className="filters" role="group" aria-label="Filter projects">{categories.map(category => <button key={category} className={filter === category ? 'filter active' : 'filter'} aria-pressed={filter === category} onClick={() => { setFilter(category); setExpanded(false) }}>{category}<span>{category === 'All' ? projects.length : projects.filter(project => project.category === category).length}</span></button>)}</div><span className="mono archive-count" role="status">{filtered.length} projects</span></div>
-          <div className="archive-grid" id="archive-results">{visible.map(project => <button key={project.id} className="archive-card" onClick={() => setSelectedProject(project)}><span className="archive-icon" aria-hidden="true">{project.category === 'Mobile' ? <TbDeviceMobile /> : project.category === 'Web' ? <TbWorld /> : <TbPuzzle />}</span><span className="archive-card-copy"><span className="archive-name">{project.name}</span><span className="archive-field">{project.field}</span><span className="archive-role">{project.role}</span></span><TbArrowUpRight className="archive-arrow" aria-hidden="true" /></button>)}</div>
-          {filtered.length > 6 && <button className="button button-outline archive-expand" onClick={() => setExpanded(!expanded)} aria-expanded={expanded} aria-controls="archive-results">{expanded ? 'Show fewer projects' : `See all ${filtered.length} projects`}<Icon>{expanded ? <TbMinus /> : <TbPlus />}</Icon></button>}
+        <section id="archive" className="archive-section section-space" tabIndex="-1" aria-labelledby="archive-title">
+          <div className="container"><div className="section-heading" data-reveal><h2 id="archive-title">There’s more to the story<span className="heading-dot">.</span></h2><p>Mobile apps, web products, and small tools that make a difference.</p></div>
+          <div className="archive-toolbar"><div className="filters" role="group" aria-label="Filter projects">{categories.map(category => <button key={category} className={filter === category ? 'filter active' : 'filter'} aria-pressed={filter === category} onClick={() => setFilter(category)}>{category}<span>{category === 'All' ? projects.length : projects.filter(project => project.category === category).length}</span></button>)}</div><span className="mono archive-count">{filtered.length} projects</span></div></div>
+          <ProjectSlider projects={filtered} onSelect={setSelectedProject} />
         </section>
-        <section id="contact" className="contact-section" tabIndex="-1" aria-labelledby="contact-title"><div className="container">
+        <section id="contact" className="contact-section" tabIndex="-1" aria-labelledby="contact-title"><FooterWave ready={!introPlaying} /><div className="container">
           <div className="contact-top" data-reveal><p className="mono muted">Have something in mind?</p><h2 id="contact-title">Let’s make<br />something <span>good.</span></h2><a className="contact-arrow" href={`mailto:${profile.email}`} aria-label="Email Het Patel"><TbArrowUpRight /></a></div>
           <div className="contact-bottom"><div className="email-group"><a href={`mailto:${profile.email}`} className="email-link">{profile.email}</a><button className="icon-button copy-button" aria-label="Copy email address" onClick={copyEmail}>{copyStatus === 'Email copied' ? <TbCheck /> : <TbCopy />}</button><span role="status" className="copy-status">{copyStatus}</span></div><div className="social-links"><a href={profile.linkedin} target="_blank" rel="noreferrer"><TbBrandLinkedin aria-hidden="true" /> LinkedIn <TbArrowUpRight aria-hidden="true" /></a><a href={profile.github} target="_blank" rel="noreferrer"><TbBrandGithub aria-hidden="true" /> GitHub <TbArrowUpRight aria-hidden="true" /></a></div></div>
-          <footer className="footer"><p>© {new Date().getFullYear()} Het Patel</p><span>Made with care. Built to work.</span><a href="#home">Back to top <TbArrowUp aria-hidden="true" /></a></footer>
+          <footer className="footer"><p>© {new Date().getFullYear()} Het Patel</p><button className="replay-intro" onClick={() => { ScrollSmoother.get()?.scrollTop(0); window.scrollTo({ top: 0, behavior: 'instant' }); setIntroPlaying(true) }}>Replay intro</button><a href="#home">Back to top <TbArrowUp aria-hidden="true" /></a></footer>
         </div></section>
       </main>
     </div></div>
     <ProjectDialog project={selectedProject} onClose={() => setSelectedProject(null)} />
-    <Motion revision={`${filter}-${expanded}`} />
+    {introPlaying && <GardenIntro onComplete={finishIntro} />}
   </div>
 }
 

@@ -5,7 +5,7 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/het-patel-804a352aa/', github: 'https://github.com/HetSocet',
 }
 
-export const projects = [
+const projectList = [
   {
     id: 'petfinder', name: 'Pet Finder', category: 'Mobile', field: 'Adoption & community',
     summary: 'Helping pets find their people.', role: 'End-to-end development, team of two',
@@ -118,4 +118,34 @@ export const projects = [
     stack: ['Next.js', 'Vercel'], url: 'https://daliy.tools/',
     contribution: ['Created a personal collection of everyday utilities with Next.js.', 'Deployed the project on Vercel.'],
   },
+  {
+    id: 'petschool', name: 'PetSchool', category: 'Mobile', field: 'Pet training & wellbeing',
+    summary: 'Small lessons. Happier companions.', role: 'Solo design & development',
+    description: 'A pet-training app that adapts its theme and training experience for dogs and cats.',
+    stack: ['React Native', 'Firebase'], url: 'https://apps.apple.com/us/app/petschool/id6771285946',
+    contribution: ['Owned the project from design through deployment as a solo developer.', 'Built dog- and cat-specific training experiences, session reminders, badges, and achievements.'],
+  },
 ]
+
+const identity = {
+  petfinder: ['petfinderlogo.webp', '#e6e1f4'], mrbrush: ['mrbrushlogo.webp', '#f5eab6'],
+  cabuno: ['cabunologo.webp', '#c9dff1'], elara: ['elaralogo.webp', '#f0e3e5'],
+  ruggy: ['ruggylogo.webp', '#d8e9e4'], sos: ['soslogo.webp', '#f2e5d6'],
+  musematch: ['musematchlogo.webp', '#e6e1eb'], kindcircle: ['kindcirclelogo.webp', '#e1eada'],
+  vectortrace: ['vectortracelogo.webp', '#dee7ec'], spine: ['spirnrecoreyprologo.webp', '#dce9ec'],
+  infolocker: ['infolockerlogo.webp', '#e9e6dc'], petschool: ['petschoollogo.webp', '#e9efcf'],
+}
+const apple = {
+  petfinder: 'https://apps.apple.com/us/app/pet-finder/id6754903257',
+  cabuno: 'https://apps.apple.com/us/app/cabuno/id6756303803',
+  elara: 'https://apps.apple.com/us/app/elara-prenatal-app/id6760452596',
+  musematch: 'https://apps.apple.com/us/app/musematch/id6736466630',
+  sos: 'https://apps.apple.com/us/app/sos-p%C3%A2tisserie/id6745355919',
+  infolocker: 'https://apps.apple.com/us/app/info-locker/id6514317895',
+}
+export const projects = projectList.map(project => ({ ...project,
+  logo: identity[project.id] ? `/logos/${identity[project.id][0]}` : null,
+  tint: identity[project.id]?.[1],
+  cover: project.featured ? `/images/covers/${project.id}.webp` : null,
+  appleUrl: apple[project.id],
+}))

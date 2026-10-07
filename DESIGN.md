@@ -10,7 +10,23 @@ The supplied references informed typography, portfolio pacing, and image-led wor
 
 Project contributions come from help.md and the supplied resume. The resume supplies the full name, contact details, verified LinkedIn URL, employment, and education. The conflicting SOS Pâtisserie free-credit counts were intentionally omitted. No invented project impact metrics or client testimonials are included.
 
-The prior decorative notebook, loading screen, custom cursor, and unused 3D code were removed. The existing root domain and useful home/work/about/contact/skills anchors remain available.
+The prior decorative notebook, custom cursor, and unused 3D code were removed. The existing root domain and useful home/work/about/contact/skills anchors remain available.
+
+## Motion and project-gallery update
+
+The name-garden intro adapts the canvas drawing methods supplied in `intro.md` and the timing/appearance of `garden-het-patel-typed.mp4`. Charcoal or off-white lettering, green vines, and lime flowers follow the current theme. It runs once per browser session, has Skip/Escape controls, and can be replayed from the footer. Reduced-motion visitors receive a brief static rendering. The local drawing adapter excludes the reference's network, tracking, editor, and export behavior.
+
+Selected work now uses four image-only covers in a pinned GSAP ScrollTrigger gallery on sufficiently tall desktop viewports. Smaller screens and reduced-motion settings use a native horizontal gallery. Each cover opens the existing project details. The all-projects archive wraps infinitely with GSAP Draggable, arrow controls, keyboard navigation, filters, and supplied app logos. It contains 17 projects, including PetSchool, plus the supplied App Store links.
+
+The contact section uses a MorphSVG curve that springs back according to scroll velocity. Reduced motion keeps the edge flat. Vertical page scrolling remains available throughout the archive carousel.
+
+New conceptual cover artwork, exact prompts, and asset paths are documented in [COVER_ART.md](COVER_ART.md).
+
+Interaction references:
+
+- https://demos.gsap.com/demo/horizontal-scrolling-gallery/
+- https://demos.gsap.com/demo/infinite-card-slider/
+- https://demos.gsap.com/demo/footer-bounce/
 
 ## Artwork and source assets
 
