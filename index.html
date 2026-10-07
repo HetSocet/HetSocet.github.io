@@ -3,18 +3,30 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&display=swap"
-    rel="stylesheet">
-  <title>Het | Mobile & Web Developer</title>
+  <link rel="preload" as="image" href="/images/optimized/chrome-asterisk.webp" fetchpriority="high" />
+  <meta name="description" content="Het Patel is a mobile and web developer in Ahmedabad, building thoughtful products with React Native, FlutterFlow, React, and Firebase. Explore selected work and 16 projects." />
+  <meta name="theme-color" content="#f5f5f0" />
+  <link rel="canonical" href="https://het-dev.me/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Het Patel | Mobile & Web Developer" />
+  <meta property="og:description" content="Good ideas. Built for real. Mobile apps, web experiences, and everyday tools by Het Patel." />
+  <meta property="og:url" content="https://het-dev.me/" />
+  <meta property="og:image" content="https://het-dev.me/social-preview.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <title>Het Patel | Mobile & Web Developer</title>
+  <script>
+    try {
+      const saved = localStorage.getItem('het-theme');
+      document.documentElement.dataset.theme = saved === 'light' || saved === 'dark' ? saved : matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    } catch { document.documentElement.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+  </script>
 </head>
 
 <body>
   <div id="root"></div>
+  <noscript><p>Het Patel, Mobile & Web Developer. Enable JavaScript to explore the portfolio, <a href="/het-resume.pdf">download my resume</a>, or email <a href="mailto:hetwork0312@gmail.com">hetwork0312@gmail.com</a>.</p></noscript>
   <script type="module" src="/src/main.jsx"></script>
 </body>
 
