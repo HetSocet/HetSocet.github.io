@@ -1,0 +1,121 @@
+const play = (id) => `https://play.google.com/store/apps/details?id=${id}`
+
+export const profile = {
+  name: 'Het Patel', email: 'hetwork0312@gmail.com',
+  linkedin: 'https://www.linkedin.com/in/het-patel-804a352aa/', github: 'https://github.com/HetSocet',
+}
+
+export const projects = [
+  {
+    id: 'petfinder', name: 'Pet Finder', category: 'Mobile', field: 'Adoption & community',
+    summary: 'Helping pets find their people.', role: 'End-to-end development, team of two',
+    description: 'A cross-platform app for pet adoption, lost-pet discovery, and a community of people who care about animals.',
+    stack: ['FlutterFlow', 'Firebase'], url: play('com.brilworks.petfinder'), featured: true,
+    contribution: ['Owned product scoping, UI design, implementation, and Play Store release alongside one other developer.', 'Built authentication, pet profiles, location-based discovery, image uploads, likes, and notifications.', 'Added the community feed, reporting and moderation flow, and community ads, then supported post-launch releases.'],
+  },
+  {
+    id: 'mrbrush', name: 'Mr. Brush', category: 'Mobile', field: 'AI & creativity',
+    summary: 'A little prompt. A new possibility.', role: 'Solo development',
+    description: 'An AI image creation app with preset styles and a community for sharing what you make.',
+    stack: ['React Native', 'Firebase', 'Gemini API'], url: play('com.brilworksdigital.Mrbrush'), featured: true,
+    contribution: ['Built the in-house product as a solo developer using React Native and Firebase.', 'Integrated Gemini image generation and preset visual themes.', 'Implemented community sharing and content restrictions to prevent explicit or inappropriate generations.'],
+  },
+  {
+    id: 'cabuno', name: 'Cabuno', category: 'Mobile', field: 'Transport & mobility',
+    summary: 'Making the next ride simpler.', role: 'Solo development',
+    description: 'A cab-service application built with React Native and Firebase.',
+    stack: ['React Native', 'Firebase'], url: play('com.brilworks.cabuno'), featured: true,
+    contribution: ['Developed the cab-service app as a solo project.', 'Built the mobile application with React Native and connected it to Firebase services.'],
+  },
+  {
+    id: 'elara', name: 'Elara', category: 'Mobile', field: 'Health & wellbeing',
+    summary: 'Care for every chapter of motherhood.', role: 'Mobile development',
+    description: 'A companion for women before, during, and after pregnancy, bringing everyday journaling and week-by-week information together.',
+    stack: ['React Native', 'Firebase'], url: play('com.brilworksdigital.Elara'), featured: true,
+    contribution: ['Worked on the React Native and Firebase application.', 'Implemented daily journaling and week-by-week baby development information, including fruit-based size comparisons.', 'Worked on yoga content and reminders for the pregnancy journey.'],
+  },
+  {
+    id: 'ruggy', name: 'Ruggy', category: 'Mobile', field: 'Operations & subscriptions',
+    summary: 'Rug-care operations, without the paperwork.', role: 'Authentication & monetization',
+    description: 'An operations app for rug-washing businesses, their partners, and their teams.',
+    stack: ['React Native', 'Firebase', 'Stripe', 'RevenueCat'], url: play('io.servicebuddy.ruggy'),
+    contribution: ['Rebuilt onboarding with one-time email verification codes, expiry, resend throttling, and attempt limits.', 'Migrated a subscription-gated experience to a freemium model with a 14-day trial and server-managed entitlements.', 'Implemented monthly and annual in-app purchases, restore purchases, receipt validation, billing screens, and existing-user plan migration.'],
+  },
+  {
+    id: 'sos', name: 'SOS Pâtisserie', category: 'Mobile', field: 'AI & food',
+    summary: 'A baking assistant that speaks pastry.', role: 'Authentication, AI & monetization',
+    description: 'A French-language AI assistant for baking questions, ingredient substitutions, and recipe troubleshooting.',
+    stack: ['FlutterFlow', 'Firebase', 'OpenAI', 'RevenueCat'], url: play('com.sospatisserie.app.android'),
+    contribution: ['Built sign-in and anonymous trial flows so users could try the app before creating an account.', 'Integrated OpenAI through a Cloud Functions proxy with request validation and per-user rate limits.', 'Implemented server-managed credits and verified purchases, constrained the assistant to pastry questions, and supported the Play Store release.'],
+  },
+  {
+    id: 'musematch', name: 'MuseMatch', category: 'Mobile', field: 'Commerce & community',
+    summary: 'A marketplace with a playful twist.', role: 'Commerce & payment integrations',
+    description: 'A buy-and-sell marketplace featuring giveaways where users guess tags for a chance to win products.',
+    stack: ['FlutterFlow', 'Firebase', 'Stripe', 'PayPal'], url: play('com.musematch.app.android'),
+    contribution: ['Built the tag-guessing giveaway system.', 'Implemented subscriptions and checkout using Stripe and PayPal.', 'Connected seller accounts so users could list and sell products.'],
+  },
+  {
+    id: 'kindcircle', name: 'KindCircle', category: 'Mobile', field: 'Community & support',
+    summary: 'A place for parents to find support.', role: 'Mobile development',
+    description: 'A community for parents caring for children with health challenges, with spaces to share experiences, arrange gatherings, and donate.',
+    stack: ['React Native', 'Firebase', 'Razorpay'], url: play('com.brilworksdigital.KindCircle'),
+    contribution: ['Worked on the React Native and Firebase community application.', 'Contributed to a product bringing parent conversations, gatherings, and donations into one place.'],
+  },
+  {
+    id: 'vectortrace', name: 'VectorTrace', category: 'Web', field: 'CRM & operations',
+    summary: 'Business workflows, on web and mobile.', role: 'Web & mobile development',
+    description: 'A CRM and point-of-sale product with four user flows, extended from a React web app to mobile.',
+    stack: ['React', 'Firebase', 'Cloud Functions', 'Capacitor'], url: play('com.brilworks.vectortrace'),
+    contribution: ['Worked on the React application and Firebase Cloud Functions.', 'Used Capacitor to bring the existing web experience to mobile.'],
+  },
+  {
+    id: 'spine', name: 'SpineRecoveryPro', category: 'Mobile', field: 'Healthcare SaaS',
+    summary: 'Connecting care teams and recovery.', role: 'Support & maintenance',
+    description: 'A multi-role platform for hospitals, doctors, nurses, and patients to coordinate treatment and recovery.',
+    stack: ['React Native', 'Firebase'], url: play('com.brilworksdigital.spinerecoverypro'),
+    contribution: ['Supported and maintained the healthcare SaaS application.', 'Worked within a product covering hospital registration, staff invitations, patient records, exercises, questionnaires, chat, and step tracking.'],
+  },
+  {
+    id: 'infolocker', name: 'Info Locker', category: 'Mobile', field: 'Property management',
+    summary: 'The details of a home, all together.', role: 'Analytics & subscriptions',
+    description: 'A property information app that helps rental owners store, organize, and maintain details about their homes.',
+    stack: ['FlutterFlow', 'Firebase'], url: play('com.infolocker.app.android'),
+    contribution: ['Worked on analytics and subscription functionality.', 'Built item creation and editing flows for property information.'],
+  },
+  {
+    id: 'socialora', name: 'Socialora', category: 'Web', field: 'Social automation',
+    summary: 'Tools for better Instagram outreach.', role: 'Tool development & QA',
+    description: 'An in-house Instagram automation product for lead generation and direct-message workflows.',
+    stack: ['Automation', 'Quality assurance'], url: 'https://www.socialora.app/',
+    contribution: ['Created tools for the Instagram automation product.', 'Worked on quality assurance for lead-generation and bulk-messaging workflows.'],
+  },
+  {
+    id: 'nudge', name: 'Nudge', category: 'Extensions', field: 'Productivity & CRM',
+    summary: 'Keep the next conversation moving.', role: 'Browser extension project',
+    description: 'A CRM browser extension for email, LinkedIn direct messages, follow-ups, and reminders.',
+    stack: ['Browser extension', 'CRM'], url: 'https://chromewebstore.google.com/detail/nudge/ndjmcmejbfehgknkcbkfongfdhobhidn',
+    contribution: ['Worked on the Nudge browser extension, bringing follow-ups and reminders into communication workflows.'],
+  },
+  {
+    id: 'snapmark', name: 'SnapMark', category: 'Extensions', field: 'Capture & annotation',
+    summary: 'Capture a thought. Share the context.', role: 'Browser extension project',
+    description: 'A browser extension for capturing and annotating screenshots, with direct link sharing.',
+    stack: ['Browser extension', 'Screenshots'], url: 'https://chromewebstore.google.com/detail/snapmark-screenshot-annot/fnmebjcohbkibogienjfhfmnlpcfkbdb',
+    contribution: ['Worked on the screenshot and annotation extension with direct link-sharing functionality.'],
+  },
+  {
+    id: 'eyerest', name: 'EyeRest', category: 'Extensions', field: 'Everyday wellbeing',
+    summary: 'A small reminder to look away.', role: 'Browser extension project',
+    description: 'A browser extension that reminds people to take eye breaks using the 20-20-20 rule.',
+    stack: ['Browser extension', 'Reminders'], url: 'https://chromewebstore.google.com/detail/eyerest-20-20-20-rule-eye/kkhnggiamacckgpdkmeecjclididdloi',
+    contribution: ['Worked on the eye-rest reminder extension for people spending long periods at a screen.'],
+  },
+  {
+    id: 'daily', name: 'Daliy.tools', category: 'Web', field: 'Personal project',
+    summary: 'Useful little tools for everyday things.', role: 'Personal project',
+    description: 'My own collection of practical tools, built to make everyday tasks a little easier.',
+    stack: ['Next.js', 'Vercel'], url: 'https://daliy.tools/',
+    contribution: ['Created a personal collection of everyday utilities with Next.js.', 'Deployed the project on Vercel.'],
+  },
+]

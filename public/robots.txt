@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://het-dev.me/sitemap.xml
