@@ -29,13 +29,18 @@ function Motion({ revision }) {
     media.add('(prefers-reduced-motion: no-preference)', () => {
       const timeline = gsap.timeline({ defaults: { ease: 'power3.out', duration: 1 } })
       timeline.from('.hero-copy > *', { y: 35, opacity: 0, stagger: .12 })
-      gsap.to('.hero-art-inner', { y: -55, rotation: 14, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 } })
       gsap.utils.toArray('[data-reveal]').forEach(element => {
         gsap.from(element, { y: 32, opacity: 0, duration: .8, ease: 'power2.out', scrollTrigger: { trigger: element, start: 'top 94%', once: true } })
       })
     })
-    media.add('(min-width: 768px) and (prefers-reduced-motion: no-preference)', () => {
-      gsap.from('.hero-art', { rotation: -8, duration: 1.1, delay: .15, ease: 'power3.out' })
+    media.add({ animate: '(prefers-reduced-motion: no-preference)', small: '(max-width: 767px)' }, context => {
+      if (!context.conditions.animate) return
+      const small = context.conditions.small
+      // Scrolling down grows and lifts the portrait; scrolling up reverses it.
+      gsap.fromTo('.hero-art-inner', { yPercent: 0, scale: 1 }, {
+        yPercent: small ? -8 : -14, scale: small ? 1.08 : 1.2, ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .65, invalidateOnRefresh: true },
+      })
     })
     const refresh = () => ScrollTrigger.refresh()
     document.fonts.ready.then(refresh)
@@ -171,7 +176,7 @@ function App() {
             <p className="hero-description">I build thoughtful mobile apps and web experiences, taking everyday ideas from the first sketch to the final release.</p>
             <a className="button button-dark" href="#work">Explore my work <Icon><TbArrowDown /></Icon></a>
           </div>
-          <div className="hero-art" aria-hidden="true"><div className="hero-art-inner"><img src="/images/optimized/chrome-asterisk.webp" alt="" width="900" height="900" fetchPriority="high" /></div></div>
+          <div className="hero-art" aria-hidden="true"><div className="hero-art-inner"><img src="/Felt-Wool Portrait in Maroon Kurta(2).png" alt="" width="1122" height="1257" fetchPriority="high" /></div></div>
         </section>
         <SelectedWork projects={featured} onSelect={setSelectedProject} ready={!introPlaying} />
         <section id="about" className="about-section container section-space" tabIndex="-1" aria-labelledby="about-title">

@@ -21,7 +21,7 @@
 .skip-link { position: fixed; left: 20px; top: -80px; padding: 14px 20px; z-index: 20; background: var(--accent); color: #242722; }
 .skip-link:focus { top: 15px; }
 .hero { position: relative; min-height: 700px; padding-top: 175px; padding-bottom: 85px; display: flex; align-items: flex-start; }
-.hero-copy { position: relative; z-index: 1; width: 73%; pointer-events: none; }
+.hero-copy { position: relative; z-index: 2; width: 73%; pointer-events: none; }
 .hero-copy a { pointer-events: auto; }
 .eyebrow { text-transform: uppercase; letter-spacing: .06em; }
 .hero .eyebrow { margin-bottom: 30px; }
@@ -34,7 +34,8 @@
 .button-dark:hover { background: var(--accent); color: #242722; }
 .button-outline { border: 1px solid var(--line); background: transparent; }
 .button-outline:hover { background: var(--surface-raised); }
-.hero-art { position: absolute; width: 48%; right: -20px; top: 158px; }
+.hero-art { position: absolute; z-index: 1; width: 48%; right: -20px; top: 158px; pointer-events: none; }
+.hero-art-inner { transform-origin: center bottom; }
 .hero-art img { width: 100%; height: auto; }
 .section-heading { margin-bottom: 42px; }
 .section-heading h2 { font-size: clamp(31px, 3.6vw, 49px); font-weight: 550; line-height: 1.16; letter-spacing: -.055em; }
@@ -159,13 +160,12 @@
   .navigation.is-open { display: flex; align-items: stretch; flex-direction: column; gap: 6px; }
   .navigation a { padding: 9px 12px; font-size: 17px; }
   .navigation .nav-contact { margin-left: 0; border: 0; }
-  .hero { min-height: auto; padding-top: 126px; padding-bottom: 310px; }
+  .hero { min-height: auto; padding-top: 126px; padding-bottom: 375px; }
   .hero-copy { width: 100%; }
   .hero .eyebrow { font-size: 9px; margin-bottom: 25px; }
   .hero h1 { font-size: clamp(53px, 11.3vw, 84px); letter-spacing: -.07em; }
   .hero-description { font-size: 13px; max-width: 315px; margin: 24px 0; }
-  .hero-art { top: auto; right: calc(50% - 157px); bottom: 6px; width: 315px; }
-  .hero-art-inner { transform: none !important; }
+  .hero-art { top: auto; right: 50%; bottom: 6px; width: min(315px, calc(100vw - 32px)); transform: translateX(50%); }
   .button { font-size: 11px; min-height: 50px; }
   .section-heading { margin-bottom: 30px; }
   .section-heading p { font-size: 13px; max-width: 300px; }
