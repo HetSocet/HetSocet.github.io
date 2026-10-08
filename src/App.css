@@ -165,6 +165,8 @@
   .hero .eyebrow { font-size: 9px; margin-bottom: 25px; }
   .hero h1 { font-size: clamp(53px, 11.3vw, 84px); letter-spacing: -.07em; }
   .hero-description { font-size: 13px; max-width: 315px; margin: 24px 0; }
+  .hero-copy > .button { position: relative; top: -12px; display: flex; width: 52px; height: 52px; min-height: 52px; padding: 0; gap: 0; justify-content: center; border-radius: 50%; margin-left: auto; transition: background .25s; }
+  .hero-button-label { display: none; }
   .hero-art { top: auto; right: 50%; bottom: 6px; width: min(315px, calc(100vw - 32px)); transform: translateX(50%); }
   .button { font-size: 11px; min-height: 50px; }
   .section-heading { margin-bottom: 30px; }
@@ -248,10 +250,8 @@
 .slider-viewport { height: 430px; position: relative; overflow: hidden; touch-action: pan-y; cursor: grab; }
 .slider-viewport:active { cursor: grabbing; }
 .slider-card { position: absolute; top: 15px; left: 0; width: 310px; padding: 0; text-align: left; background: var(--surface-raised); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; will-change: transform; touch-action: pan-y; }
-.slider-brand { height: 250px; display: grid; place-items: center; background: var(--project-tint); color: #242722; }
-.slider-brand img { width: 112px; height: 112px; object-fit: contain; border-radius: 24px; pointer-events: none; user-select: none; }
-.project-lettermark { display: flex; flex-direction: column; align-items: center; gap: 20px; font-size: 27px; font-weight: 650; letter-spacing: -.05em; }
-.project-lettermark > svg { font-size: 52px; stroke-width: 1.2; }
+.slider-cover { display: block; aspect-ratio: 3 / 2; background: var(--surface-raised); }
+.slider-cover img { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; user-select: none; }
 .slider-card-info { display: flex; flex-direction: column; gap: 10px; padding: 24px; }
 .slider-card-info > .mono { color: var(--muted); font-size: 9px; }
 .slider-card-name { display: flex; align-items: center; justify-content: space-between; gap: 15px; font-size: 23px; font-weight: 600; letter-spacing: -.04em; }
@@ -285,8 +285,6 @@
   .archive-section { padding-bottom: 125px; }
   .slider-viewport { height: 400px; }
   .slider-card { width: min(76vw, 290px); }
-  .slider-brand { height: 220px; }
-  .slider-brand img { width: 100px; height: 100px; border-radius: 22px; }
   .slider-card-info { padding: 22px; }
   .slider-card-name { font-size: 21px; }
   .slider-controls { gap: 18px; margin-top: 8px; }
