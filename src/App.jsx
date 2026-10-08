@@ -174,7 +174,7 @@ function App() {
             <p className="eyebrow">Het Patel / Mobile & web developer</p>
             <h1 id="hero-title">Good ideas.<br /><span>Built for real.</span></h1>
             <p className="hero-description">I build thoughtful mobile apps and web experiences, taking everyday ideas from the first sketch to the final release.</p>
-            <a className="button button-dark" href="#work">Explore my work <Icon><TbArrowDown /></Icon></a>
+            <a className="button button-dark" href="#work" aria-label="Explore my work"><span className="hero-button-label">Explore my work</span> <Icon><TbArrowDown /></Icon></a>
           </div>
           <div className="hero-art" aria-hidden="true"><div className="hero-art-inner"><img src="/Felt-Wool Portrait in Maroon Kurta(2).png" alt="" width="1122" height="1257" fetchPriority="high" /></div></div>
         </section>

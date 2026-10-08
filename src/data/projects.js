@@ -146,6 +146,6 @@ const apple = {
 export const projects = projectList.map(project => ({ ...project,
   logo: identity[project.id] ? `/logos/${identity[project.id][0]}` : null,
   tint: identity[project.id]?.[1],
-  cover: project.featured ? `/images/covers/${project.id}.webp` : null,
+  cover: `/images/covers/${project.id}.webp`,
   appleUrl: apple[project.id],
 }))

@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef, useState } from 'react'
-import { TbArrowLeft, TbArrowRight, TbArrowUpRight, TbWorld, TbPuzzle } from 'react-icons/tb'
+import { TbArrowLeft, TbArrowRight, TbArrowUpRight } from 'react-icons/tb'
 import { gsap } from 'gsap'
 import { Draggable } from 'gsap/Draggable'
 gsap.registerPlugin(Draggable)
@@ -61,7 +61,7 @@ export default function ProjectSlider({ projects, onSelect }) {
   return <div className="project-slider" role="region" aria-roledescription="carousel" aria-label="All projects">
     <div ref={viewport} className={`slider-viewport ${reduced ? 'reduced-slider' : ''}`} onKeyDown={event => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); controller.current?.next(event.key === 'ArrowRight' ? 1 : -1, true) } }}>
       {projects.map((project, index) => <button ref={node => { cards.current[index] = node }} className={`slider-card slider-${project.id}`} key={project.id} tabIndex={index === active ? 0 : -1} onClick={() => { if (!controller.current?.dragged()) onSelect(project) }} aria-label={`${project.category}, ${project.name}, ${project.field}. View project`}>
-        <span className="slider-brand" style={{ '--project-tint': project.tint || '#e2e7dc' }}>{project.logo ? <img src={project.logo} width="160" height="160" alt="" loading="lazy" /> : <span className="project-lettermark" aria-hidden="true">{project.category === 'Extensions' ? <TbPuzzle /> : <TbWorld />}<span>{project.name}</span></span>}</span>
+        <span className="slider-cover"><img src={project.cover} width="1440" height="960" alt="" loading="lazy" decoding="async" draggable="false" /></span>
         <span className="slider-card-info"><span className="mono">{project.category}</span><span className="slider-card-name">{project.name}<TbArrowUpRight aria-hidden="true" /></span><span className="slider-card-field">{project.field}</span></span>
       </button>)}
     </div>
